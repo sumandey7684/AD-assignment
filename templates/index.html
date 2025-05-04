@@ -1,29 +1,115 @@
 <!DOCTYPE html>
-<html>
-<head><title>Sentiment App</title></head>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Sentiment App</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Montserrat', sans-serif;
+      background: linear-gradient(to right, #dfe9f3, #ffffff);
+      display: grid;
+      place-items: center;
+      height: 100vh;
+    }
+
+    form {
+      background-color: #ffffff;
+      border-radius: 12px;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+      padding: 30px;
+      display: grid;
+      gap: 20px;
+      width: 100%;
+      max-width: 500px;
+    }
+
+    textarea {
+      resize: none;
+      padding: 10px;
+      font-size: 1rem;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      transition: border 0.3s ease;
+    }
+
+    textarea:focus {
+      border-color: #5c6ac4;
+      outline: none;
+    }
+
+    input[type="submit"] {
+      background-color: #5c6ac4;
+      color: white;
+      padding: 12px;
+      font-size: 1rem;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    input[type="submit"]:hover {
+      background-color: #4b5bb0;
+    }
+
+    .result {
+      margin-top: 20px;
+      font-size: 1.5rem;
+      font-weight: 600;
+      animation: fadeIn 1s ease-in-out;
+      text-align: center;
+    }
+
+    .emoji {
+      display: inline-block;
+      margin-left: 10px;
+      animation: bounce 1s infinite;
+    }
+
+    h1 {
+      margin-top: 40px;
+      color: #333;
+      font-size: 1.2rem;
+      text-align: center;
+    }
+
+    @keyframes fadeIn {
+      0% { opacity: 0; transform: translateY(-20px); }
+      100% { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes bounce {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-5px); }
+    }
+  </style>
+</head>
 <body>
   <form method="post">
     <textarea name="text" rows="5" cols="50" placeholder="Enter text..."></textarea><br>
     <input type="submit" value="Analyze Sentiment">
   </form>
-  <h2>
 
-    <p>
+  {% if sentiment %}
+    <div class="result">
       Sentiment: {{ sentiment }}
       {% if sentiment == 'POSITIVE' %}
-        😊
+        <span class="emoji">😊</span>
       {% elif sentiment == 'NEGATIVE' %}
-        😞
+        <span class="emoji">😞</span>
       {% elif sentiment == 'NEUTRAL' %}
-        😐
+        <span class="emoji">😐</span>
       {% elif sentiment == 'MIXED' %}
-        😕
+        <span class="emoji">😕</span>
       {% else %}
-        ❓
+        <span class="emoji">❓</span>
       {% endif %}
-    </p>
+    </div>
+  {% endif %}
 
-  </h2>
-  <h1>This is for AD class Flask Api Assignment</h1>
+  <h1>This is for AD class Flask API Assignment</h1>
 </body>
 </html>
